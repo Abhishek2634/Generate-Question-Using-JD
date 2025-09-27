@@ -1,11 +1,9 @@
-🤖 AI-Powered Interview Assistant
+# 🤖 AI-Powered Interview Assistant
 =================================
 
 > A modern, intelligent interview platform built with Next.js that conducts automated technical interviews for full-stack React/Node.js positions.
 
-!\[Next.js\]([https://img.shields.io/](https://img.shields.io/)
 
-!\[TypeScript\]([https://img.shields.io/badge/TypeScript-5/Ant Design-5.21+-1890ff](https://img.shields.io/badge/TypeScript-5/Ant Design-5.21+-1890ff) 📋 **Dual Interface System**
 
 *   **Interviewee Tab**: Interactive interview experience with real-time timer and progress tracking
     
@@ -60,10 +58,10 @@
 *   **Detailed View**: Individual candidate analysis with complete interview history
     
 
-🚀 Quick Start
+### 🚀 Quick Start
 --------------
 
-Prerequisites
+### Prerequisites
 -------------
 
 *   Node.js 18.0.0 or higher
@@ -71,28 +69,31 @@ Prerequisites
 *   npm or yarn package manager
     
 
-Installation
+### Installation
 ------------
 
-1.  **Clone the repository**
+**Clone the repository**
+    
+```bash
+git clone https://github.com/Abhishek2634/Swipe--YC-S21--SDE-Intern-Assignment.git
+```
+
+**Install dependencies**
+```bash
+    npm install
+```
     
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashgit clone https://github.com/yourusername/ai-interview-assistant.git  cd ai-interview-assistant   `
+**Start development server**
+```bash
+    npm run dev
+```
 
-1.  **Install dependencies**
+
+**Open your browser**Navigate to http://localhost:3000
     
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashnpm install   `
-
-1.  **Start development server**
-    
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashnpm run dev   `
-
-1.  **Open your browser**Navigate to http://localhost:3000
-    
-
-🛠️ Tech Stack
+### 🛠️ Tech Stack
 --------------
 
 **Frontend Framework**
@@ -129,12 +130,7 @@ Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQL
 *   **PostCSS**: CSS processing and optimization
     
 
-📁 Project Structure
---------------------
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   textai-interview-assistant/  ├── src/  │   ├── app/                    # Next.js App Router  │   │   ├── api/               # API routes  │   │   │   └── parse-resume/  # Resume parsing endpoint  │   │   ├── globals.css        # Global styles  │   │   ├── layout.tsx         # Root layout  │   │   └── page.tsx           # Home page  │   ├── components/            # React components  │   │   ├── IntervieweeView.tsx  │   │   ├── InterviewerDashboard.tsx  │   │   └── WelcomeBackModal.tsx  │   └── lib/                   # Utilities and services  │       ├── redux/             # Redux store and slices  │       └── services/          # AI services and utilities  ├── public/                    # Static assets  ├── package.json  └── README.md   `
-
-🎮 Usage Guide
+### 🎮 Usage Guide
 --------------
 
 **For Candidates (Interviewee Tab)**
@@ -195,7 +191,7 @@ Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQL
     *   Include all interview data and analytics
         
 
-⚙️ Configuration
+### ⚙️ Configuration
 ----------------
 
 **Question Customization**
@@ -226,7 +222,7 @@ Update src/app/globals.css for:
 *   Responsive breakpoints
     
 
-🔧 API Routes
+### 🔧 API Routes
 -------------
 
 **POST /api/parse-resume**
@@ -239,7 +235,7 @@ Update src/app/globals.css for:
 *   **Returns**: JSON object with name, email, phone
     
 
-📊 Performance & Analytics
+### 📊 Performance & Analytics
 --------------------------
 
 **Scoring Algorithm**
@@ -266,13 +262,11 @@ Update src/app/globals.css for:
 *   **Trend Analysis**: Performance patterns over time
     
 
-🚀 Deployment
+### 🚀 Deployment
 -------------
 
 **Vercel (Recommended)**
 ------------------------
-
-
 
 1.  Fork the repository
     
@@ -285,12 +279,12 @@ Update src/app/globals.css for:
 5.  Open a Pull Request
     
 
-📝 License
+### 📝 License
 ----------
 
 This project is licensed under the MIT License - see the [LICENSE](https://www.perplexity.ai/search/LICENSE) file for details.
 
-🐛 Known Issues
+### 🐛 Known Issues
 ---------------
 
 *   Resume parsing accuracy depends on file formatting
@@ -300,7 +294,7 @@ This project is licensed under the MIT License - see the [LICENSE](https://www.
 *   PDF parsing may timeout on very large files
     
 
-🔮 Future Enhancements
+### 🔮 Future Enhancements
 ----------------------
 
 *    Video interview capability
@@ -316,14 +310,14 @@ This project is licensed under the MIT License - see the [LICENSE](https://www.
 *    Real-time collaborative interviews
     
 
-📞 Support
+### 📞 Support
 ----------
 
 For questions and support:
 
 *   Create an [issue](https://github.com/yourusername/ai-interview-assistant/issues)
     
-*   Email: [support@yourcompany.com](mailto:support@yourcompany.com)
+*   Email: [support@yourcompany.com](mailto:abhishek.fst1@gmail.com)
     
 
 **Built with ❤️ for modern recruitment needs**
