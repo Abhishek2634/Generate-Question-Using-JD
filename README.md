@@ -80,13 +80,13 @@ git clone https://github.com/Abhishek2634/Swipe--YC-S21--SDE-Intern-Assignment.g
 
 **Install dependencies**
 ```bash
-    npm install
+npm install
 ```
     
 
 **Start development server**
 ```bash
-    npm run dev
+npm run dev
 ```
 
 
