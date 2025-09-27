@@ -105,7 +105,7 @@ export default function InterviewerDashboard() {
     });
   };
 
-  // Replace the formatDuration function with this:
+// Replace the incomplete formatDuration function with this complete one:
 const formatDuration = (seconds?: number): string => {
   if (!seconds || seconds <= 0) return '0s';
   
@@ -123,7 +123,14 @@ const formatDuration = (seconds?: number): string => {
       ? `${minutes}m ${remainingSeconds}s`
       : `${minutes}m`;
   }
-};
+  
+  // If over 1 hour, show hours, minutes, and seconds
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+  
+  return `${hours}h ${remainingMinutes}m ${remainingSeconds}s`;
+}; // ✅ This function now has a return statement for all code paths
+
 
 
   const exportResults = () => {
