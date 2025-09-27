@@ -1,26 +1,104 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Reset and base styles */
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Ant Design overrides */
+.ant-layout {
+  background: #f0f2f5;
+  min-height: 100vh;
+}
+
+.ant-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+  margin-bottom: 24px;
+}
+
+.ant-table {
+  background: white;
+}
+
+/* Utility classes for the app */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.interview-card {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.dashboard-stats {
+  margin-bottom: 24px;
+}
+
+.search-input {
+  max-width: 400px;
+  margin-bottom: 16px;
+}
+
+.question-progress {
+  margin-bottom: 24px;
+}
+
+.timer-text {
+  float: right;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.score-excellent {
+  color: #52c41a;
+  font-weight: bold;
+}
+
+.score-good {
+  color: #faad14;
+  font-weight: bold;
+}
+
+.score-poor {
+  color: #f5222d;
+  font-weight: bold;
+}
+
+.candidate-modal {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.answer-box {
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+.w-100 {
+  width: 100%;
 }
