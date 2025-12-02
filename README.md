@@ -85,7 +85,7 @@ Prerequisites
 Clone and install
 
 ```bash
-git clone https://github.com/yourusername/ai-interview-assistant.git
+git clone https://github.com/Abhishek2634/ai-interview-assistant.git
 cd ai-interview-assistant
 npm install
 # or
@@ -240,7 +240,7 @@ Recommended: Vercel
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/yourusername/ai-interview-assistant.git
+git remote add origin https://github.com/your_username/ai-interview-assistant.git
 git push -u origin main
 ```
 
@@ -320,9 +320,3 @@ Acknowledgments:
   - Use cloud storage (S3/Cloudinary) for resumes
   - Add rate limiting, CSRF protection, and HTTPS
 
----
-
-If you'd like, I can also:
-- Generate a short CONTRIBUTING.md or template issue/PR templates,
-- Provide example environment configuration for deployment,
-- Or open a PR that adds this README directly to your repository (I'll need the repo owner/name).
