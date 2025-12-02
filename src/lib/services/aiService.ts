@@ -5,113 +5,7 @@ export interface Question {
   category: string;
 }
 
-const questionDatabase = {
-  Easy: [
-    {
-      category: 'JavaScript Fundamentals',
-      questions: [
-        'What is the difference between `let`, `const`, and `var` in JavaScript?',
-        'Explain the concept of closures in JavaScript with a simple example.',
-        'What is hoisting in JavaScript? Give an example.',
-        'Explain the difference between `==` and `===` in JavaScript.',
-      ]
-    },
-    {
-      category: 'React Basics',
-      questions: [
-        'What is React and why is it popular for building web applications?',
-        'What are React components? Explain functional vs class components.',
-        'What is JSX and how does it work in React?',
-        'What are props in React and how do you pass data between components?',
-      ]
-    }
-  ],
-  Medium: [
-    {
-      category: 'React Intermediate',
-      questions: [
-        'What are React Hooks? Explain useState and useEffect.',
-        'Describe the React component lifecycle methods.',
-        'What is the useContext hook and when would you use it?',
-        'Explain controlled vs uncontrolled components in React.',
-      ]
-    },
-    {
-      category: 'Node.js Fundamentals',
-      questions: [
-        'What is Node.js and how does it differ from browser JavaScript?',
-        'Explain the event-driven architecture of Node.js.',
-        'What is npm and how do you manage dependencies?',
-        'Explain the module system in Node.js (CommonJS vs ES Modules).',
-      ]
-    }
-  ],
-  Hard: [
-    {
-      category: 'Advanced React',
-      questions: [
-        'How do you optimize React performance? Discuss memoization techniques.',
-        'Explain React Context API vs Redux for state management.',
-        'What are React Server Components and their benefits?',
-        'How do you implement code splitting and lazy loading in React?',
-      ]
-    },
-    {
-      category: 'Advanced Node.js & Full-Stack',
-      questions: [
-        'Explain the event loop in Node.js and how it handles asynchronous operations.',
-        'How do you implement authentication and authorization in a full-stack app?',
-        'What are microservices and how would you design them with Node.js?',
-        'How do you handle database connections and optimize queries?',
-      ]
-    }
-  ]
-};
-
-export const generateInterviewQuestions = (): Question[] => {
-  const questions: Question[] = [];
-  const usedQuestions = new Set<string>();
-  
-  const structure = [
-    { difficulty: 'Easy', count: 2, time: 20 },
-    { difficulty: 'Medium', count: 2, time: 60 },
-    { difficulty: 'Hard', count: 2, time: 120 }
-  ];
-  
-  structure.forEach(({ difficulty, count, time }) => {
-    const difficultyPool = questionDatabase[difficulty as keyof typeof questionDatabase];
-    
-    for (let i = 0; i < count; i++) {
-      let attempts = 0;
-      let selectedQuestion: Question | null = null;
-      
-      while (!selectedQuestion && attempts < 20) {
-        const randomCategory = difficultyPool[Math.floor(Math.random() * difficultyPool.length)];
-        const randomQuestionText = randomCategory.questions[
-          Math.floor(Math.random() * randomCategory.questions.length)
-        ];
-        
-        if (!usedQuestions.has(randomQuestionText)) {
-          selectedQuestion = {
-            text: randomQuestionText,
-            difficulty: difficulty as 'Easy' | 'Medium' | 'Hard',
-            time: time,
-            category: randomCategory.category
-          };
-          usedQuestions.add(randomQuestionText);
-        }
-        attempts++;
-      }
-      
-      if (selectedQuestion) {
-        questions.push(selectedQuestion);
-      }
-    }
-  });
-  
-  return questions;
-};
-
+// Keep your existing getAIScoreAndSummary function exactly as is
 export const getAIScoreAndSummary = (answers: { question: string; answer: string }[]) => {
   let totalScore = 0;
   
@@ -120,7 +14,7 @@ export const getAIScoreAndSummary = (answers: { question: string; answer: string
     const answerLength = item.answer.trim().length;
     const wordCount = item.answer.trim().split(/\s+/).filter(word => word.length > 0).length;
     
-    const questionDifficulty = index < 2 ? 'Easy' : index < 4 ? 'Medium' : 'Hard';
+    const questionDifficulty = index < 2 ? 'Easy' : index < 5 ? 'Medium' : 'Hard';
     
     if (answerLength === 0) {
       score = 0;
@@ -168,15 +62,15 @@ export const getAIScoreAndSummary = (answers: { question: string; answer: string
   let summary = '';
   
   if (finalScore >= 85) {
-    summary = '🌟 Outstanding performance! Demonstrates exceptional understanding of full-stack development with React and Node.js. Provides comprehensive, well-structured answers with excellent technical depth.';
+    summary = '🌟 Outstanding performance! Demonstrates exceptional understanding with comprehensive, well-structured answers and excellent technical depth.';
   } else if (finalScore >= 70) {
-    summary = '👍 Strong candidate with solid full-stack knowledge. Shows good understanding of React and Node.js fundamentals with adequate technical explanations.';
+    summary = '👍 Strong candidate with solid knowledge. Shows good understanding of fundamentals with adequate technical explanations.';
   } else if (finalScore >= 55) {
-    summary = '⚡ Decent foundation in full-stack development. Demonstrates basic understanding of React and Node.js concepts but needs improvement in providing detailed explanations.';
+    summary = '⚡ Decent foundation. Demonstrates basic understanding but needs improvement in providing detailed explanations.';
   } else if (finalScore >= 35) {
-    summary = '📚 Below expectations. Shows limited understanding of full-stack development concepts. Requires significant learning and practice.';
+    summary = '📚 Below expectations. Shows limited understanding of concepts. Requires significant learning and practice.';
   } else {
-    summary = '❌ Needs substantial development. Very limited knowledge of React and Node.js fundamentals. Not ready for a full-stack development position.';
+    summary = '❌ Needs substantial development. Very limited knowledge of fundamentals. Not ready for the position.';
   }
 
   return { finalScore, summary, detailedScores };

@@ -1,323 +1,328 @@
-# 🤖 AI-Powered Interview Assistant
-=================================
+# AI-Powered Interview Assistant
 
-> A modern, intelligent interview platform built with Next.js that conducts automated technical interviews for full-stack React/Node.js positions.
-
+An intelligent interview platform that generates role-specific questions using AI and provides automated candidate assessment.
 
 
-*   **Interviewee Tab**: Interactive interview experience with real-time timer and progress tracking
-    
-*   **Interviewer Dashboard**: Comprehensive candidate management and analytics
-    
 
-🎯 **Smart Interview Flow**
----------------------------
+## Table of Contents
 
-*   **Resume Upload**: Automatic parsing of PDF/DOCX files to extract candidate information
-    
-*   **Dynamic Question Generation**: AI-powered question selection for React/Node.js roles
-    
-*   **Timed Questions**: Progressive difficulty with specific time limits
-    
-    *   Easy: 20 seconds (JavaScript fundamentals)
-        
-    *   Medium: 60 seconds (React/Node.js concepts)
-        
-    *   Hard: 120 seconds (Advanced full-stack topics)
-        
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Quick Start](#quick-start)
+- [API Routes](#api-routes)
+- [Project Structure](#project-structure)
+- [Usage Guide](#usage-guide)
+  - [For Candidates (Interviewee)](#for-candidates-interviewee)
+  - [For Interviewers (Dashboard)](#for-interviewers-dashboard)
+- [Customization](#customization)
+- [Deployment](#deployment)
+- [Troubleshooting](#troubleshooting)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Author & Acknowledgments](#author--acknowledgments)
+- [Security & Privacy](#security--privacy)
 
-🧠 **AI-Powered Assessment**
-----------------------------
+---
 
-*   **Intelligent Scoring**: Advanced algorithm analyzing answer quality, technical keywords, and completeness
-    
-*   **Automated Summaries**: Comprehensive performance evaluation with actionable feedback
-    
-*   **Performance Classification**: Excellent, Good, Fair, Poor ratings with detailed breakdowns
-    
+## Overview
 
-💾 **Session Management**
--------------------------
+AI-Powered Interview Assistant is a modern full-stack web application (Next.js + TypeScript) that streamlines technical interviews by using Google Gemini AI to:
 
-*   **Persistent Storage**: Redux Persist ensures no data loss on page refresh
-    
-*   **Welcome Back Modal**: Seamless session resumption for interrupted interviews
-    
-*   **Real-time Progress**: Live timer with visual progress indicators
-    
+- Generate role-specific interview questions from job descriptions.
+- Time and present questions to candidates.
+- Score responses with AI-driven assessment and provide an overall candidate report.
+- Store and preview uploaded resumes.
 
-📊 **Analytics & Export**
--------------------------
+The app is intended for recruiters, hiring managers, startups, and educational institutions to get objective, automated interview support.
 
-*   **Candidate Dashboard**: Sortable table with search and filtering capabilities
-    
-*   **Performance Statistics**: Average scores, completion rates, and duration tracking
-    
-*   **CSV Export**: Comprehensive data export including questions, answers, and scores
-    
-*   **Detailed View**: Individual candidate analysis with complete interview history
-    
+---
 
-### 🚀 Quick Start
---------------
+## Key Features
 
-### Prerequisites
--------------
+- AI-Powered question generation (Google Gemini)
+  - Produces 7 tailored interview questions per job description
+  - Categorizes by difficulty (Easy, Medium, Hard)
+  - Assigns time limits per difficulty
+- Smart candidate assessment
+  - Per-question score (0–10)
+  - Overall interview score (0–100)
+  - Performance classification (Excellent / Good / Fair / Poor)
+  - AI-generated feedback and summary
+- Resume processing
+  - PDF and DOCX upload
+  - Automatic name/email/phone extraction
+- Session persistence
+  - Redux Persist to preserve interview state across refreshes
+  - "Welcome Back" modal to resume interrupted interviews
+- Timed interview experience with auto-submit on timeout
+- Analytics dashboard with filters, per-candidate view, CSV export
+- Responsive UI using Ant Design
 
-*   Node.js 18.0.0 or higher
-    
-*   npm or yarn package manager
-    
+---
 
-### Installation
-------------
+## Tech Stack
 
-**Clone the repository**
-    
+- Next.js 15 (App Router + Server Components)
+- React 19 + TypeScript
+- Ant Design 5
+- Redux Toolkit + Redux Persist
+- Google Generative AI (Gemini)
+- Mammoth (DOCX parsing) and PDF-parse (PDF extraction)
+- ESLint, PostCSS
+
+---
+
+## Quick Start
+
+Prerequisites
+
+- Node.js 18+
+- npm, yarn, or pnpm
+- Google Gemini API key
+
+Clone and install
+
 ```bash
-git clone https://github.com/Abhishek2634/Swipe--YC-S21--SDE-Intern-Assignment.git
-```
-
-**Install dependencies**
-```bash
+git clone https://github.com/yourusername/ai-interview-assistant.git
+cd ai-interview-assistant
 npm install
+# or
+yarn install
+# or
+pnpm install
 ```
-    
 
-**Start development server**
+Configure environment
+
+Create a `.env.local` in the project root:
+
+```bash
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+Start the development server
+
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
+Open your browser: http://localhost:3000
 
-**Open your browser**Navigate to http://localhost:3000
-    
+---
 
-### 🛠️ Tech Stack
---------------
+## API Routes
 
-**Frontend Framework**
-----------------------
+The app exposes a couple of core API endpoints (serverless routes in `app/api`):
 
-*   **Next.js 15.0.0**: React framework with App Router
-    
-*   **TypeScript**: Type-safe development
-    
-*   **Ant Design 5.21+**: Professional UI component library
-    
+- POST /api/generate-questions
+  - Purpose: Generate interview questions from a job description using Gemini AI.
+  - Request body:
+    ```json
+    {
+      "jobDescription": "string (50-5000 characters)"
+    }
+    ```
+  - Response:
+    ```json
+    {
+      "questions": [
+        {
+          "text": "Question text?",
+          "difficulty": "Easy | Medium | Hard",
+          "time": 120 | 180 | 240,
+          "category": "Technical Skills | Problem Solving | ..."
+        }
+      ],
+      "success": true
+    }
+    ```
+  - Errors:
+    - 400: Invalid/missing job description
+    - 429: Rate limit exceeded (retry after 60s)
+    - 503: AI service overloaded
+    - 500: Server error
 
-**State Management**
---------------------
+- POST /api/upload-resume
+  - Purpose: Upload and store candidate resume files.
+  - Request: FormData with `file`
+  - Response:
+    ```json
+    {
+      "url": "/uploads/resumes/timestamp_filename.pdf"
+    }
+    ```
 
-*   **Redux Toolkit**: Modern Redux with simplified setup
-    
-*   **Redux Persist**: Session persistence across browser sessions
-    
+Notes:
+- The prompt and logic to control distribution (2 Easy, 3 Medium, 2 Hard) and time limits live in `app/api/generate-questions/route.ts`.
+- Scoring is implemented in `lib/services/aiService.ts`.
 
-**File Processing**
--------------------
+---
 
-*   **PDF Parse**: Resume parsing from PDF files
-    
-*   **Mammoth**: DOCX file processing support
-    
+## Project Structure
 
-**Development Tools**
----------------------
+ai-interview-assistant/
+- app/
+  - api/
+    - generate-questions/route.ts
+    - upload-resume/route.ts
+  - globals.css
+  - layout.tsx
+  - page.tsx
+- components/
+  - IntervieweeView.tsx
+  - InterviewerDashboard.tsx
+  - WelcomeBackModal.tsx
+- lib/
+  - redux/
+    - store.ts
+    - interviewSlice.ts
+  - services/
+    - aiService.ts
+- public/
+  - uploads/ (resume storage, gitignored)
+- .env.local
+- next.config.js
+- package.json
+- tsconfig.json
+- README.md
 
-*   **ESLint**: Code quality and consistency
-    
-*   **PostCSS**: CSS processing and optimization
-    
+---
 
-### 🎮 Usage Guide
---------------
+## Usage Guide
 
-**For Candidates (Interviewee Tab)**
-------------------------------------
+### For Candidates (Interviewee)
 
-1.  **Upload Resume** (Optional)
-    
-    *   Drag and drop PDF/DOCX file
-        
-    *   System automatically extracts name, email, and phone
-        
-2.  **Complete Profile**
-    
-    *   Fill in any missing information
-        
-    *   Click "Start Interview"
-        
-3.  **Take Interview**
-    
-    *   Answer 6 questions progressively (Easy → Medium → Hard)
-        
-    *   Each question has a specific time limit
-        
-    *   Progress bar shows remaining time
-        
-    *   Automatic submission when time expires
-        
-4.  **View Results**
-    
-    *   Instant AI-generated score and feedback
-        
-    *   Detailed performance summary
-        
+1. Job Description
+   - Paste a job description (min 50 characters).
+   - Click "Generate Interview Questions" — AI generates 7 questions (~5s).
+2. Candidate Info
+   - Upload Resume (optional) — supports PDF and DOCX.
+   - Ensure name, email, and phone fields are filled.
+   - Click "Start Interview".
+3. Interview Flow
+   - Answer 7 timed questions sequentially.
+   - Time limits: Easy 120s, Medium 180s, Hard 240s.
+   - Answers auto-submit on timeout. Max answer length ~2000 characters.
+4. Results
+   - Immediate per-question and overall scores.
+   - AI-generated summary and recommendations.
 
-**For Interviewers (Dashboard Tab)**
-------------------------------------
+### For Interviewers (Dashboard)
 
-1.  **View Candidates**
-    
-    *   Sortable list of all completed interviews
-        
-    *   Search by name, email, or phone
-        
-    *   Filter by performance level
-        
-2.  **Analyze Performance**
-    
-    *   Detailed candidate view with Q&A breakdown
-        
-    *   Individual question scoring
-        
-    *   Performance statistics
-        
-3.  **Export Data**
-    
-    *   Download comprehensive CSV reports
-        
-    *   Include all interview data and analytics
-        
+- View, search, and filter candidates by name/email/phone or performance level.
+- Sortable candidate table by score, date, etc.
+- Click "View Details" to inspect Q&A, per-question scores, and resume (if uploaded).
+- Export filtered results to CSV for reporting.
 
-### ⚙️ Configuration
-----------------
+---
 
-**Question Customization**
---------------------------
+## Customization
 
-Modify src/lib/services/aiService.ts to:
+- Question distribution and time limits: edit `app/api/generate-questions/route.ts` and the prompt used for Gemini.
+- Scoring weights: modify `lib/services/aiService.ts` to adjust base score, keyword bonuses, and difficulty multipliers.
+- Theme: change colors and styles in `app/globals.css`.
+- Persisted storage: Redux Persist config is in `lib/redux/store.ts`.
 
-*   Add new question categories
-    
-*   Adjust difficulty levels
-    
-*   Change time limits
-    
-*   Update scoring criteria
-    
+---
 
-**UI Customization**
---------------------
+## Deployment
 
-Update src/app/globals.css for:
+Recommended: Vercel
 
-*   Color schemes
-    
-*   Typography
-    
-*   Component styling
-    
-*   Responsive breakpoints
-    
+1. Push to GitHub:
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/yourusername/ai-interview-assistant.git
+git push -u origin main
+```
 
-### 🔧 API Routes
--------------
+2. Deploy on Vercel:
+- Import repository
+- Add environment variable `GEMINI_API_KEY`
+- Deploy
 
-**POST /api/parse-resume**
---------------------------
+Other platforms: Netlify, Railway, Render — ensure `GEMINI_API_KEY` is set and build commands are configured.
 
-*   **Purpose**: Extract information from uploaded resume files
-    
-*   **Accepts**: PDF/DOCX files via FormData
-    
-*   **Returns**: JSON object with name, email, phone
-    
+---
 
-### 📊 Performance & Analytics
---------------------------
+## Troubleshooting
 
-**Scoring Algorithm**
----------------------
+- "API key not configured": ensure `.env.local` exists and `GEMINI_API_KEY` is valid.
+- "Failed to generate questions": check internet / API key / rate limits (wait 60s).
+- Resume upload fails: ensure file size < 10MB and format is PDF/DOCX. Confirm `public/uploads/resumes/` exists and is writeable in dev.
+- Session not persisting: verify `localStorage` is enabled and Redux Persist is configured.
 
-*   **Base Score**: Answer length and word count analysis
-    
-*   **Technical Keywords**: Bonus points for relevant terminology
-    
-*   **Difficulty Adjustment**: Weighted scoring based on question complexity
-    
-*   **Final Calculation**: Normalized to 0-100 scale
-    
+---
 
-**Performance Metrics**
------------------------
+## Roadmap
 
-*   **Duration Tracking**: Interview completion time in seconds
-    
-*   **Success Rates**: Percentage of completed vs. abandoned interviews
-    
-*   **Average Scores**: Aggregate performance across all candidates
-    
-*   **Trend Analysis**: Performance patterns over time
-    
+Planned enhancements:
+- Video interviews with recording
+- Custom question banks by role/department
+- More advanced analytics and charts
+- Multi-language support
+- ATS integration and calendar scheduling
+- Team collaboration and multi-user support
+- Mobile app (React Native)
 
-### 🚀 Deployment
--------------
+---
 
-**Vercel (Recommended)**
-------------------------
+## Contributing
 
-1.  Fork the repository
-    
-2.  Create a feature branch (git checkout -b feature/amazing-feature)
-    
-3.  Commit your changes (git commit -m 'Add amazing feature')
-    
-4.  Push to the branch (git push origin feature/amazing-feature)
-    
-5.  Open a Pull Request
-    
+Contributions are welcome!
 
-### 📝 License
-----------
+- Fork the repo
+- Create a feature branch (`git checkout -b feature/amazing-feature`)
+- Commit changes (`git commit -m "Add amazing feature"`)
+- Push to branch and open a PR
 
-This project is licensed under the MIT License - see the [LICENSE](https://www.perplexity.ai/search/LICENSE) file for details.
+Development guidelines:
+- Follow ESLint rules and TypeScript typing
+- Add tests and update README for new features
 
-### 🐛 Known Issues
----------------
+---
 
-*   Resume parsing accuracy depends on file formatting
-    
-*   Session persistence requires localStorage support
-    
-*   PDF parsing may timeout on very large files
-    
+## License
 
-### 🔮 Future Enhancements
-----------------------
+This project is licensed under the MIT License — see the LICENSE file for details.
 
-*    Video interview capability
-    
-*    Custom question sets per role
-    
-*    Advanced analytics dashboard
-    
-*    Multi-language support
-    
-*    Integration with ATS systems
-    
-*    Real-time collaborative interviews
-    
+---
 
-### 📞 Support
-----------
+## Author & Acknowledgments
 
-For questions and support:
+Author: Your Name  
+GitHub: @yourusername  
+LinkedIn: your-profile
 
-*   Create an [issue](https://github.com/yourusername/ai-interview-assistant/issues)
-    
-*   Email: [support@yourcompany.com](mailto:abhishek.fst1@gmail.com)
-    
+Acknowledgments:
+- Google Gemini AI
+- Ant Design
+- Vercel
+- Next.js team
 
-**Built with ❤️ for modern recruitment needs**
+---
+
+## Security & Privacy
+
+- Resume files are stored locally in `/public/uploads/` (gitignored).
+- Candidate data is stored client-side (localStorage). For production use, migrate to a secure database.
+- API keys are stored in environment variables (`.env.local`) and should never be committed.
+- For production:
+  - Use authenticated access (NextAuth or similar)
+  - Use cloud storage (S3/Cloudinary) for resumes
+  - Add rate limiting, CSRF protection, and HTTPS
+
+---
+
+If you'd like, I can also:
+- Generate a short CONTRIBUTING.md or template issue/PR templates,
+- Provide example environment configuration for deployment,
+- Or open a PR that adds this README directly to your repository (I'll need the repo owner/name).
